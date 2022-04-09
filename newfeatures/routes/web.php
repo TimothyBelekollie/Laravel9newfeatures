@@ -15,8 +15,25 @@ use App\Http\Controllers\Home\HomeController;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+// I am using helper function
+// Route::get('/', function () {
+//     return str('Hi, I am Timothy wishing you an amazing day')->upper();
+// });
+
+// Route::get('/', function () {
+//     return str('Hi, I am Timothy wishing you an amazing day')->slug();
+// });
+
 Route::get('/', function () {
     return view('welcome');
+})->name('test');
+
+
+Route::get('/test', function () {
+ return redirect()->route('test');
 });
 // this is Laravel 8 way of defining route
 Route::get('/about',[HomeController::class,'index']);
