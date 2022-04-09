@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Home\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+// this is Laravel 8 way of defining route
+Route::get('/about',[HomeController::class,'index']);
+Route::get('/contact',[HomeController::class,'contact']);
+
+// this is route grouping in laravel 9
+Route::controller(HomeController::class)->group(function(){
+    Route::get('/about','index');
+    Route::get('/contact','contact');
 });
