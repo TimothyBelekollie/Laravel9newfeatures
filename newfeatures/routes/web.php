@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Home\HomeController;
-
+use Illuminate\Support\Facades\Blade;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +15,9 @@ use App\Http\Controllers\Home\HomeController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 // I am using helper function
 // Route::get('/', function () {
 //     return str('Hi, I am Timothy wishing you an amazing day')->upper();
@@ -26,14 +26,16 @@ use App\Http\Controllers\Home\HomeController;
 // Route::get('/', function () {
 //     return str('Hi, I am Timothy wishing you an amazing day')->slug();
 // });
-
-Route::get('/', function () {
-    return view('welcome');
-})->name('test');
+// This is new feature is meant to render a blade string.
+Route::get('/render', function () {
+    return Blade::render('{{$value}},Timothy',['value'=>'Hello']);
+});
 
 
 Route::get('/test', function () {
- return redirect()->route('test');
+//  return redirect()->route('test');
+// the to_route helper function perform the same action the redirect()and route() fuction does.
+return to_route('test');
 });
 // this is Laravel 8 way of defining route
 Route::get('/about',[HomeController::class,'index']);
@@ -44,3 +46,4 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/about','index');
     Route::get('/contact','contact');
 });
+// Another new feature in laravel 9 is the ignition error page
